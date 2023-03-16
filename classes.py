@@ -1,5 +1,7 @@
 '''Module with classes to compress information in different ways.'''
 
+import csv
+
 class Lzw_compress:
     '''Use LZW algorithm to encode and decode information.'''
     def encode(text: str) -> tuple[list[int], dict]:
@@ -9,6 +11,7 @@ class Lzw_compress:
         Return a tuple with list of coded information and default dictionary to decode.
         '''
         chrs_dict = {idx: chr for idx, chr in enumerate(sorted(list(set(text))))}
+        chrs_default = {key: chr for key, chr in chrs_dict.items()}
         code = []
 
         i = 0
@@ -32,7 +35,7 @@ class Lzw_compress:
             next_chr = text[i]
             chrs_dict[len(chrs_dict)] = current_chr + next_chr
         
-        return code, chrs_dict
+        return code, chrs_default
 
     def decode(code: list[int], default_dict: dict) -> str:
         '''
@@ -51,6 +54,12 @@ class Lzw_compress:
             i += 1
         
         return ''.join(text)
+
+    def write_encoded(code: list[int], def_dict: dict[int], file_name: str) -> None:
+        '''Write encoded text to a file.'''
+        with open(file_name, 'w') as file:
+            file.write(','.join([str(num) for num in code]))
+            file.write(str(def_dict))
 
 
 class Lz77_compress:
@@ -101,3 +110,8 @@ class Lz77_compress:
             decode = decode + decode[len(decode) - back : len(decode) - back + number] + last
         
         return decode
+
+    def write_encoded(code: list[int], file_name: str) -> None:
+        '''Write encoded text to a file.'''
+        with open(file_name, 'w') as file:
+            file.write(','.join([str(num) for num in code]))
