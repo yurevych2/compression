@@ -86,6 +86,9 @@ Lz77_compress.write_encoded(code, 'similar_encoded_lz77_17.txt')
 code = Lz77_compress.encode(weird_text, 27)
 Lz77_compress.write_encoded(code, 'similar_encoded_lz77_27.txt')
 
+with open('huffman_new.txt', 'w', encoding='utf-8') as file:
+    file.write(decoded)
+
 # LZW
 # SIMILAR TEXT 833bytes before encoding and 456bytes after ~ 1,8
 # DIFFERENT TEXT 7,93KB before encoding and 11,5KB after ~ 0,68
