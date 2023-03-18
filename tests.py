@@ -86,6 +86,16 @@ Lz77_compress.write_encoded(code, 'similar_encoded_lz77_17.txt')
 code = Lz77_compress.encode(weird_text, 27)
 Lz77_compress.write_encoded(code, 'similar_encoded_lz77_27.txt')
 
+# read txt file
+with open('different_text.txt', 'r', encoding='utf-8') as file:
+    data = file.read()
+
+# encoding decoding by Huffman method
+huffman = Huffman()
+code, tree = huffman.encode(data)
+decoded = huffman.decode(code, tree)  
+
+# write decode into file by Huffman
 with open('huffman_new.txt', 'w', encoding='utf-8') as file:
     file.write(decoded)
 
