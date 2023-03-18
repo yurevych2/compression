@@ -197,15 +197,3 @@ class Huffman:
                 if item == value:
                     decode_code.append(key)
         return ''.join(decode_code)
-        
-
-def read_file(input_file: str):
-   """
-   Read file
-
-   Args:
-        Name file: 'chorna_rada.txt'
-   """
-    with open(input_file, 'r', encoding='utf-8') as file:
-        return file.read()
-  
