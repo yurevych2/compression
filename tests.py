@@ -1,4 +1,4 @@
-from classes import Lz77_compress, Lzw_compress
+from classes import Lz77_compress, Lzw_compress, Huffman
 
 math_text = '11213409172489889898121341345134511617171167'
 weird_text = 'abacabadabacacacdabacabadabacacacdabacabadabacacacdabacabadabacacacd\
@@ -41,6 +41,10 @@ for text in text_list:
     assert(text == Lz77_compress.decode(Lz77_compress.encode(text, 7)))
     assert(text == Lz77_compress.decode(Lz77_compress.encode(text, 8)))
     assert(text == Lz77_compress.decode(Lz77_compress.encode(text, 9)))
+    huffman = Huffman()
+    code, tree = huffman.encode(text)
+    decoded = huffman.decode(code, tree)
+    assert (data == huffman.decode(code, tree))
 
 # save text that is different
 with open('different_text.txt', 'r', encoding='utf-8') as file:
@@ -93,5 +97,9 @@ Lz77_compress.write_encoded(code, 'similar_encoded_lz77_27.txt')
 # DIFFERENT TEXT with buffer 7 7,93KB before encoding and 71,6 after ~ 0,12
 # DIFFERENT TEXT with buffer 17  7,93KB before encoding and 60,5KB after ~ 0,13
 # DIFFERENT TEXT with buffer 27  7,93KB before encoding and 55,4KB after ~ 0,14
+
+# Huffman
+# DIFFERENT TEXT 124KB before encoding and after 124KB
+# SIMILAR TEXT 11KB before encoding and after 11KB
 
 print('Nice work =^w^=')
