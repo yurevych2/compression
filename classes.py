@@ -199,11 +199,13 @@ class Huffman:
         return ''.join(decode_code)
         
 
-with open('different_text.txt', 'r', encoding='utf-8') as file:
-    """
-    Read file
+def read_file(input_file: str):
+   """
+   Read file
 
-    Args:
+   Args:
         Name file: 'chorna_rada.txt'
-    """
-    data = file.read()
+   """
+    with open(input_file, 'r', encoding='utf-8') as file:
+        return file.read()
+  
